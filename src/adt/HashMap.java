@@ -1,11 +1,11 @@
 package adt;
 
-//Name: NG WAI HEEI
-//Stud ID: 22WMR04095
 public class HashMap<K, V> implements  HashMapInterface<K, V>{
     public static final int CAPACITY = 20;
     private int size;
     private Entry<K, V>[] table;
+
+
 
     public static class Entry<K, V>{
         private K key;

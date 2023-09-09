@@ -1,12 +1,7 @@
-package Entity;
+package entity;
 
 
-import adt.HashMap;
-import adt.HashMapInterface;
-
-//Name: NG WAI HEEI
-//Stud ID: 22WMR04095
-public class Programme{
+public class Programme {
 
     //Programme data
     private String id;

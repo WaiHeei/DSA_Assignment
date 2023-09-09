@@ -1,7 +1,5 @@
 package adt;
 
-//Name: NG WAI HEEI
-//Stud ID: 22WMR04095
 public interface HashMapInterface<K, V> {
     //Associates value to the specified key
     void put(K key, V value);
