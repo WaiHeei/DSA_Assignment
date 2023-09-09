@@ -1,5 +1,8 @@
 package entity;
 
+
+import java.util.Objects;
+
 public class Student implements Comparable<Student> {
     private int studentId;
     private String studentName;
@@ -28,11 +31,24 @@ public class Student implements Comparable<Student> {
 
     @Override
     public int compareTo(Student other) {
-        /*int result = this.studentId.compareTo(other.studentId);
-        if (result == 0) {
-            result = this.compare(this.studentName, other.studentName);
-        }
-        return result;*/
-        return 0;
+        return Integer.compare(this.studentId, other.studentId);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Student student = (Student) obj;
+        return studentId == student.studentId && Objects.equals(studentName, student.studentName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(studentId, studentName);
+    }
+
 }

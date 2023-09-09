@@ -60,7 +60,6 @@ public class TreeSet<T extends Comparable<T>> implements TreeSetInterface<T> {
                 node = node.right;
             }
         }
-
         return false; // Element not found
     }
 

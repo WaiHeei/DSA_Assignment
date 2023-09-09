@@ -1,5 +1,7 @@
 package adt;
 
+import entity.Student;
+
 import java.util.Iterator;
 
 public interface TreeSetInterface<T> {

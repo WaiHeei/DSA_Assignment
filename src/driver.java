@@ -171,13 +171,13 @@ public class driver {
         student.add(student29);
         student.add(student30);
 
-        TutorialGroup tutGrp1 = new TutorialGroup(programmeList.get("FOCS01").getCode(), 1, 1, 1);
-        TutorialGroup tutGrp2 = new TutorialGroup(programmeList.get("FOCS01").getCode(), 2, 2, 3);
-        TutorialGroup tutGrp3 = new TutorialGroup(programmeList.get("FOCS01").getCode(), 3, 1, 2);
+        TutorialGroup tutGrp1 = new TutorialGroup(programmeList.get(programme1.getId()).getCode(), 1, 1, 1);
+        TutorialGroup tutGrp2 = new TutorialGroup(programmeList.get(programme1.getId()).getCode(), 2, 2, 3);
+        TutorialGroup tutGrp3 = new TutorialGroup(programmeList.get(programme1.getId()).getCode(), 3, 1, 2);
 
-        TutorialGroup tutGrp4 = new TutorialGroup(programmeList.get("FOCS02").getCode(), 1, 2, 3);
-        TutorialGroup tutGrp5 = new TutorialGroup(programmeList.get("FOCS02").getCode(), 2, 3, 2);
-        TutorialGroup tutGrp6 = new TutorialGroup(programmeList.get("FOCS02").getCode(), 3, 1, 1);
+        TutorialGroup tutGrp4 = new TutorialGroup(programmeList.get(programme2.getId()).getCode(), 1, 2, 3);
+        TutorialGroup tutGrp5 = new TutorialGroup(programmeList.get(programme2.getId()).getCode(), 2, 3, 2);
+        TutorialGroup tutGrp6 = new TutorialGroup(programmeList.get(programme2.getId()).getCode(), 3, 1, 1);
 
         tutGroup.add(tutGrp1);
         tutGroup.add(tutGrp2);
@@ -243,7 +243,7 @@ public class driver {
             int mainMenuChoice = 0;
             do {
                 try {
-                    System.out.println("\nEnter your choice > ");
+                    System.out.print("\nEnter your choice > ");
                     mainMenuChoice = scanner.nextInt();
                     if (mainMenuChoice < 1 || mainMenuChoice > 3) {
                         System.out.println("Invalid input. Please enter a number between 1 and 3.");
@@ -403,17 +403,27 @@ public class driver {
                                     } while (validId == false);
 
                                     System.out.print("\nStudent Name > ");
-                                    String stdName = scanner.next();
+                                    scanner.nextLine();
+                                    String stdName = scanner.nextLine();
 
                                     // Check for duplicate student
-                                    boolean duplicateStudent = tutor.checkDuplicateStudent(stdId,stdName);
+//                                    boolean duplicateStudent = student.checkDuplicateStudent(stdId,stdName);
+                                    Student newStud = new Student(stdId,stdName);
+//                                    boolean duplicateStudent = false;
+//
+//                                    Iterator<Student> stdItr = student.getIterator();
+//                                    while (stdItr.hasNext() && duplicateStudent == false){
+//                                        duplicateStudent = student.equals(newStud);
+//                                    }
+                                    boolean duplicateStudent = tutor.findAllStudentById(student,stdId);
 
                                     if (duplicateStudent == false) {
                                         tutor.addStudent(selectedGroup,stdId, stdName);
+//                                        student.add(newStud);
                                         System.out.println("\nStudent added to tutorial group successfully.\n");
                                     } else {
                                         System.out.println("\nDuplicate student detected");
-                                        System.out.println("Student Adding Unsuccessful\n");
+                                        System.out.println("\nAdding Student Unsuccessful.");
                                     }
 
                                     continueMenu();
@@ -444,43 +454,54 @@ public class driver {
 
                             case 2:  //Remove a student from group
                                 do {
-                                    TutorialGroup selectedGroup = tutor.displayTutorialGroup();
-                                    tutor.printAllStudents(selectedGroup);
-
-                                    int stdIndex = 0;
+                                    TutorialGroup groupChoice = null;
                                     do {
-                                        try {
-                                            System.out.print("\nEnter index for student to delete > ");
-                                            stdIndex = scanner.nextInt();
-                                            if (stdIndex < 1 || stdIndex > selectedGroup.getStudents().size()) {
-                                                System.out.println("Invalid input. Please enter a valid index number.");
+                                        System.out.println("Select tutorial group : ");
+                                        groupChoice = tutor.displayTutorialGroup();
+
+                                        if (!groupChoice.getStudents().isEmpty()){
+                                            tutor.printAllStudents(groupChoice);
+
+                                            int stdIndex = 0;
+                                            do {
+                                                try {
+                                                    System.out.print("\nEnter index for student to delete > ");
+                                                    stdIndex = scanner.nextInt();
+                                                    if (stdIndex < 1 || stdIndex > groupChoice.getStudents().size()) {
+                                                        System.out.println("Invalid input. Please enter a valid index number.");
+                                                    }
+                                                } catch (InputMismatchException e) {
+                                                    System.out.println("Invalid input. Please enter a number.");
+                                                    scanner.next(); // discard the invalid input
+                                                }
+                                            } while (stdIndex < 1 || stdIndex > groupChoice.getStudents().size());
+
+                                            Student studentToDelete = null;
+                                            int currentIndex = 1;
+                                            Iterator<Student> studentIterator = groupChoice.getStudents().getIterator();
+
+                                            while (studentIterator.hasNext()) {
+                                                Student students = studentIterator.next();
+                                                if (currentIndex == stdIndex) {
+                                                    studentToDelete = students;
+                                                    break;
+                                                }
+                                                currentIndex++;
                                             }
-                                        } catch (InputMismatchException e) {
-                                            System.out.println("Invalid input. Please enter a number.");
-                                            scanner.next(); // discard the invalid input
+
+                                            boolean deleteStudent = tutor.removeStudent(groupChoice,studentToDelete);
+
+                                            if (deleteStudent == true){
+                                                System.out.println("\nStudent Deleted.\n");
+                                            }else {
+                                                System.out.println("\nStudent Delete Unsuccessful.\n");
+                                            }
+
+                                        }else {
+                                            System.out.println("\nNo student in this tutorial group.\n");
+                                            continue5 = false;
                                         }
-                                    } while (stdIndex < 1 || stdIndex > selectedGroup.getStudents().size());
-
-                                    Student studentToDelete = null;
-                                    int currentIndex = 1;
-                                    Iterator<Student> studentIterator = selectedGroup.getStudents().getIterator();
-
-                                    while (studentIterator.hasNext()) {
-                                        Student students = studentIterator.next();
-                                        if (currentIndex == stdIndex) {
-                                            studentToDelete = students;
-                                            break;
-                                        }
-                                        currentIndex++;
-                                    }
-
-                                    boolean deleteStudent = tutor.removeStudent(selectedGroup,studentToDelete);
-
-                                    if (deleteStudent == true){
-                                        System.out.println("\nStudent Deleted.\n");
-                                    }else {
-                                        System.out.println("\nStudent Delete Unsuccessful.\n");
-                                    }
+                                    }while (continue5 == true);
 
                                     continueMenu();
                                     do {
@@ -510,8 +531,8 @@ public class driver {
 
                             case 3:   //Change tutorial group for a student
                                 boolean noStudent = false;
-
                                 do {
+                                    System.out.println("Select student from tutorial group : ");
                                     TutorialGroup selectedGroup3 = tutor.displayTutorialGroup();
 
                                     if (!selectedGroup3.getStudents().isEmpty()){
@@ -522,7 +543,7 @@ public class driver {
                                         noStudent = true;
                                     }
 
-                                    while (noStudent == false) {
+                                    while (noStudent == false){
                                         int stdIndex = 0;
                                         do {
                                             try {
@@ -563,62 +584,33 @@ public class driver {
                                         tutor.addStudent(grpToChange, studentToAmend.getStudentId(),studentToAmend.getStudentName());
 
                                         System.out.println("\nStudent Changed Successful.");
-
-                                        do {
-                                            try {
-                                                System.out.print("\nContinue to make changes for the same group :");
-                                                System.out.print("\n  1. Yes ");
-                                                System.out.print("\n  2. No ");
-                                                System.out.print("\nEnter your choice > ");
-                                                continueChoice = scanner.nextInt();
-                                                validCtnChoice = true;
-
-                                                if (continueChoice < 1 || continueChoice > 2) {
-                                                    System.out.println("Invalid input. Please enter number 1 or 2.");
-                                                }
-                                            } catch (InputMismatchException e) {
-                                                System.out.println("Invalid input. Please enter a number.");
-                                                scanner.next(); // discard the invalid input
-                                                validCtnChoice = false;
-                                            }
-                                        } while (!validCtnChoice);
-
-                                        if (continueChoice == 2) {
-                                            noStudent = true; // Exit and return to the main menu
-                                            break;
-                                        }else {
-                                            noStudent = false;
-                                        }
-
-                                        boolean validNewGroupChoice = false;
-                                        int newGroupChoice = 0;
-                                        do {
-                                            try {
-                                                System.out.print("\nMake changes for another group : ");
-                                                System.out.print("\n  1. Yes ");
-                                                System.out.print("\n  2. No ");
-                                                System.out.print("\nEnter your choice > ");
-                                                newGroupChoice = scanner.nextInt();
-                                                validNewGroupChoice = true;
-
-                                                if (newGroupChoice < 1 || newGroupChoice > 2) {
-                                                    System.out.println("Invalid input. Please enter number 1 or 2.");
-                                                }
-                                            } catch (InputMismatchException e) {
-                                                System.out.println("Invalid input. Please enter a number.");
-                                                scanner.next(); // discard the invalid input
-                                                validNewGroupChoice = false;
-                                            }
-                                        } while (!validNewGroupChoice);
-
-                                        if (newGroupChoice == 2) {
-                                            noStudent = true; // Exit and return to the main menu
-                                        }else {
-                                            noStudent = false;
-                                        }
-
+                                        noStudent = true;
                                     }
-                                } while (noStudent == true);
+
+                                    continueMenu();
+                                    do {
+                                        try {
+                                            System.out.print("\nEnter your choice > ");
+                                            continueChoice = scanner.nextInt();
+                                            validCtnChoice = true;
+
+                                            if (tutMenuChoice < 1 || tutMenuChoice > 2) {
+                                                System.out.println("Invalid input. Please enter number 1 or 2.");
+                                            }
+                                        } catch (InputMismatchException e) {
+                                            System.out.println("Invalid input. Please enter a number.");
+                                            scanner.next(); // discard the invalid input
+                                            validCtnChoice = false;
+                                        }
+                                    } while (validCtnChoice == false);
+
+                                    if (continueChoice == 1) {
+                                        continue2 = true;
+                                    } else {
+                                        continue2 = false;
+                                        exitToMenu = true;
+                                    }
+                                }while (continue2 == true);
                                 break;
 
                             case 4:   //Find a student
@@ -645,14 +637,14 @@ public class driver {
                                     } while (validCtnChoice == false);
 
                                     if (findChoice == 1){
-                                        System.out.println("\nEnter Student Name > ");
+                                        System.out.print("\nEnter Student Name > ");
                                         scanner.nextLine();
                                         String findStdName = scanner.nextLine();
 
                                         tutor.findStudentByNameInAllGroups(findStdName);
 
                                     }else {
-                                        System.out.println("\nEnter student ID > ");
+                                        System.out.print("\nEnter student ID > ");
                                         int findStdId = scanner.nextInt();
 
                                         tutor.findStudentByIdInAllGroups(findStdId);
@@ -687,6 +679,7 @@ public class driver {
                             case 5:   //List all student in a tutorial group
                                 do{
                                     do {
+                                        System.out.println("Select tutorial group : ");
                                         TutorialGroup groupChoice = tutor.displayTutorialGroup();
 
                                         if (!groupChoice.getStudents().isEmpty()){
@@ -745,7 +738,7 @@ public class driver {
                         switch (filterChoice){
                             case 1:  //filter by programme code
                                 do {
-                                    System.out.println("Enter programme code (RDS/RSW) > ");
+                                    System.out.print("Enter programme code (RDS/RSW) > ");
                                     String progCode = scanner.next();
 
                                     tutor.filterTutorialGroupByCode(progCode);
@@ -781,7 +774,7 @@ public class driver {
                                     int yearInput = 0;
                                     do {
                                         try {
-                                            System.out.println("Enter year > ");
+                                            System.out.print("Enter year > ");
                                             yearInput = scanner.nextInt();
                                             validCtnChoice = true;
 
@@ -828,7 +821,7 @@ public class driver {
                                     int semInput = 0;
                                     do {
                                         try {
-                                            System.out.println("Enter semester > ");
+                                            System.out.print("Enter semester > ");
                                             semInput = scanner.nextInt();
                                             validCtnChoice = true;
 
@@ -875,7 +868,7 @@ public class driver {
                                     int groupInput = 0;
                                     do {
                                         try {
-                                            System.out.println("Enter group number > ");
+                                            System.out.print("Enter group number > ");
                                             groupInput = scanner.nextInt();
                                             validCtnChoice = true;
 

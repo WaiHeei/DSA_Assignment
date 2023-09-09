@@ -118,7 +118,6 @@ public class Tutor1 {
             return true;
         }else
             return false;
-
     }
     public void addStudent(TutorialGroup tutGroup, int stdId, String stdName){
         Student stdToAdd = new Student(stdId,stdName);
@@ -137,7 +136,7 @@ public class Tutor1 {
         System.out.println("=================================================");
         System.out.println("Students in group "+ tutGroup);
         System.out.println("=================================================");
-        System.out.println("    Student ID\t\t     StudentName");
+        System.out.println("    Student ID\t\tStudentName");
 
         TreeSetInterface<Student> students = tutGroup.getStudents();
         Iterator<Student> studentIterator = students.getIterator();
@@ -203,6 +202,20 @@ public class Tutor1 {
         if (!found) {
             System.out.println("No students found with ID '" + studentId + "'.");
         }
+    }
+
+    public boolean findAllStudentById(TreeSet<Student> students, int studentId){
+//        TreeSetInterface<Student> students = tutGroup.getStudents();
+        Iterator<Student> studentIterator = students.getIterator();
+
+        boolean found = false;
+        while (studentIterator.hasNext()) {
+            Student student = studentIterator.next();
+            if (student.getStudentId() == (studentId)) {
+                found = true;
+            }
+        }
+        return found;
     }
 
     public boolean findStudentById(TutorialGroup tutGroup, int studentId){
