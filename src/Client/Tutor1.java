@@ -137,7 +137,7 @@ public class Tutor1 {
         System.out.println("=================================================");
         System.out.println("Students in group "+ tutGroup);
         System.out.println("=================================================");
-        System.out.println("    Student ID\t\t   StudentName");
+        System.out.println("    Student ID\t\t     StudentName");
 
         TreeSetInterface<Student> students = tutGroup.getStudents();
         Iterator<Student> studentIterator = students.getIterator();
@@ -223,8 +223,28 @@ public class Tutor1 {
         return found;
     }
 
+    public void filterTutorialGroupByCode(String progCode){
+        System.out.println("Tutorial Groups for Code " + progCode + ":");
+        boolean found = false;
+
+        Iterator<TutorialGroup> tutItr = tutGroup.getIterator();
+
+        int i = 1;
+        while (tutItr.hasNext()) {
+            TutorialGroup group = tutItr.next();
+            if (group.getProgrammeId().equals(progCode)) {
+                System.out.println(i++ + ". " + group);
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No tutorial groups found for Code " + progCode + ".");
+        }
+    }
+
     public void filterTutorialGroupByYear(int year){
-        System.out.println("Tutorial Groups for Year " + year + ":");
+        System.out.println("Tutorial Groups for Year " + year + ":\n");
         boolean found = false;
 
         Iterator<TutorialGroup> tutItr = tutGroup.getIterator();

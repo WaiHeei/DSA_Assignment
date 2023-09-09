@@ -67,7 +67,7 @@ public class TreeSet<T extends Comparable<T>> implements TreeSetInterface<T> {
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return firstNode == null;
     }
 
     @Override
