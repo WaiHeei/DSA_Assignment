@@ -1,6 +1,7 @@
 import adt.HashMap;
 import adt.HashMapInterface;
 import adt.TreeSet;
+import client.ProgrammeManager;
 import client.Tutor1;
 import entity.Programme;
 import entity.Student;
@@ -100,10 +101,11 @@ public class driver {
         HashMapInterface<String, Programme> programmeList = new HashMap<>();
 
         Tutor1 tutor = new Tutor1(student,tutGroup);
+        ProgrammeManager programmeManager = new ProgrammeManager(programmeList);
 
         //Create data
-        Programme programme1 = new Programme("FOCS01", "RSW", "Software Engineering", "Bachelor in Software Engineering", "Ts. Lim Shen Huoy", 3);
-        Programme programme2 = new Programme("FOCS02", "RDS", "Data Science", "Bachelor in Data Science", "Ts. Lim Shen Huoy", 3);
+        Programme programme1 = new Programme("FOCS1", "RSW", "Software Engineering", "Bachelor in Software Engineering", "Ts. Lim Shen Huoy", 3);
+        Programme programme2 = new Programme("FOCS2", "RDS", "Data Science", "Bachelor in Data Science", "Ts. Lim Shen Huoy", 3);
 
         programmeList.put(programme1.getId(), programme1);
         programmeList.put(programme2.getId(), programme2);
@@ -261,91 +263,18 @@ public class driver {
                     String pOption = scanner.nextLine();
 
                     if (pOption.equals("1")) {
-                        String addProgrammeID = String.valueOf("FOCS0" + (programmeList.size() + 1));
-                        System.out.println("Please enter programme code: ");
-                        String programmeCode = scanner.nextLine();
-                        System.out.println("Please enter programme name: ");
-                        String programmeName = scanner.nextLine();
-                        System.out.println("Please enter programme description: ");
-                        String programmeDesc = scanner.nextLine();
-                        System.out.println("Please enter programme programmeLeader: ");
-                        String programmeLeader = scanner.nextLine();
-                        System.out.println("Please enter programme duration: ");
-                        int programmeDuration = scanner.nextInt();
-                        Programme programme = new Programme(addProgrammeID, programmeCode, programmeName, programmeDesc, programmeLeader, programmeDuration);
-                        programmeList.put(programme.getId(), programme);
-
+                        programmeManager.addProgramme(programmeList);
                     } else if (pOption.equals("2")) {
-                        System.out.println("Please enter programme ID that you want to delete: ");
-                        String deleteProgrammeID = scanner.nextLine();
-
-                        if (programmeList.containsKey(deleteProgrammeID)) {
-                            programmeList.remove(deleteProgrammeID);
-                            tutor.removeAllTutorialGroupInProgramme(deleteProgrammeID);
-                        } else {
-                            System.out.println(deleteProgrammeID + " does not exist in the Programme! ");
-                        }
+                        programmeManager.deleteProgramme(programmeList);
                     } else if (pOption.equals("3")) {
-                        System.out.println("Please enter programme ID that you want to search: ");
-                        String searchProgrammeID = scanner.nextLine();
-
-                        if (programmeList.containsKey(searchProgrammeID)) {
-                            System.out.println(programmeList.get(searchProgrammeID));
-                        } else {
-                            System.out.println(searchProgrammeID + " does not exist in the Programme! ");
-                        }
-
+                        programmeManager.searchProgramme(programmeList);
                     } else if (pOption.equals("4")) {
-                        System.out.println("Please enter programme ID that you want to edit: ");
-                        String editProgrammeID = scanner.nextLine();
-                        if (programmeList.containsKey(editProgrammeID)) {
-                            //show chosen programme
-
-                            Programme programme = programmeList.get(editProgrammeID);
-
-                            System.out.println("Please enter programme code: ");
-                            String programmeCode = scanner.nextLine();
-                            if (!(programmeCode.toUpperCase() == "SAME")) {
-                                programme.setCode(programmeCode);
-                            }
-
-                            System.out.println("Please enter programme name: ");
-                            String programmeName = scanner.nextLine();
-                            if (!(programmeName.toUpperCase() == "SAME")) {
-                                programme.setName(programmeName);
-                            }
-
-                            System.out.println("Please enter programme description: ");
-                            String programmeDesc = scanner.nextLine();
-                            if (!(programmeDesc.toUpperCase() == "SAME")) {
-                                programme.setDescription(programmeDesc);
-                            }
-
-                            System.out.println("Please enter programme programmeLeader: ");
-                            String programmeLeader = scanner.nextLine();
-                            if (!(programmeLeader.toUpperCase() == "SAME")) {
-                                programme.setProgrammeLeader(programmeLeader);
-                            }
-
-                            System.out.println("Please enter programme duration: ");
-                            int programmeDuration = scanner.nextInt();
-
-                            System.out.println(programmeList.get(editProgrammeID));
-                        } else {
-                            System.out.println(editProgrammeID + " does not exist in the Programme! ");
-                        }
+                        programmeManager.editProgramme(programmeList);
                     } else if (pOption.equals("5")) {
-                        int index = 1;
-                        System.out.printf("%-2s %-3s %-25s %-35s %-20s %-8s \n", "", "Code", "Name", "Description", "Programme Leader", "Duration");
-                        for (int i = 1; i <= programmeList.size(); i++) {
-                            String key = Integer.toString(i);
-                            Programme programme = programmeList.get("FOCS0" + key);
-                            if (programme != null) {
-                                System.out.printf("%-2d %-4s %-25s %-35s %-20s %-1d \n", index, programme.getCode(), programme.getName(), programme.getDescription(),
-                                        programme.getProgrammeLeader(), programme.getDuration());
-                            }
-                            index++;
-                        }
+                        programmeManager.displayAllProgramme(programmeList);
+                    }else if (pOption.equals("6")) {
+
+                    }else if (pOption.equals("7")) {
 
                     }
                 }
