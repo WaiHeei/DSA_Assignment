@@ -1,5 +1,7 @@
-
 package client;
+
+/*Name : Leng Yen Rou
+ID : 220WMR04092*/
 
 import adt.TreeSet;
 import adt.TreeSetInterface;
@@ -19,6 +21,17 @@ public class Tutor1 {
         this.students = students;
         this.tutGroup = tutGroup;
     }
+
+//    public void removeAllTutorialGroupInProgramme(String deleteProgrammeID){
+//        Iterator<TutorialGroup> tutGroupIterator = tutGroup.getIterator();
+//
+//        while (tutGroupIterator.hasNext()) {
+//            TutorialGroup group = tutGroupIterator.next();
+//            if (group.getProgrammeId().equals(deleteProgramCode)) {
+//                tutGroupIterator.remove(); // Remove the matching tutorial group
+//            }
+//        }
+//    }
 
     public TutorialGroup displayTutorialGroup(){
         System.out.println("==================================");
@@ -110,14 +123,6 @@ public class Tutor1 {
             count++;
         }
         return selectedGroup;
-    }
-
-    public boolean checkDuplicateStudent(int stdId, String stdName){
-        Student stdToFind = new Student(stdId,stdName);
-        if (students.contains(stdToFind)) {
-            return true;
-        }else
-            return false;
     }
     public void addStudent(TutorialGroup tutGroup, int stdId, String stdName){
         Student stdToAdd = new Student(stdId,stdName);

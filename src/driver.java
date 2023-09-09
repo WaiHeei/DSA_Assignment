@@ -281,6 +281,7 @@ public class driver {
 
                         if (programmeList.containsKey(deleteProgrammeID)) {
                             programmeList.remove(deleteProgrammeID);
+                            tutor.removeAllTutorialGroupInProgramme(deleteProgrammeID);
                         } else {
                             System.out.println(deleteProgrammeID + " does not exist in the Programme! ");
                         }
