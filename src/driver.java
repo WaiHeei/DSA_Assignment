@@ -208,16 +208,11 @@ public class driver {
         boolean validCtnChoice = false;
         boolean continue1 = false;
         boolean continue2 = false;
-        boolean continue3 = false;
-        boolean continue4 = false;
         boolean continue5 = false;
         boolean exitToMenu = false;
         int tutMenuChoice = 0;
         int stdId = 0;
         int continueChoice = 0;
-
-        String program = null;
-        int yr = 0, sem = 0, grp = 0;
 
         do {
             Menu();
