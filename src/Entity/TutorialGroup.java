@@ -80,9 +80,21 @@ public class TutorialGroup implements Comparable<TutorialGroup>{
 
     @Override
     public int compareTo(TutorialGroup other) {
+        // Check for null tutorialGroupID values
+        if (this.tutorialGroupID == null && other.tutorialGroupID == null) {
+            return 0; // Both are considered equal
+        } else if (this.tutorialGroupID == null) {
+            return -1; // This object is considered smaller
+        } else if (other.tutorialGroupID == null) {
+            return 1; // The other object is considered smaller
+        }
+
+        // Now, it's safe to compare non-null tutorialGroupID values
         int result = this.tutorialGroupID.compareTo(other.tutorialGroupID);
+
         if (result == 0) {
-            this.programmeCode.compareTo(other.programmeCode);
+            // Compare other fields if necessary
+            result = this.programmeCode.compareTo(other.programmeCode);
             if (result == 0) {
                 result = Integer.compare(this.year, other.year);
                 if (result == 0) {
@@ -93,8 +105,10 @@ public class TutorialGroup implements Comparable<TutorialGroup>{
                 }
             }
         }
+
         return result;
     }
+
 
     public boolean contains(TutorialGroup other) {
         return this.equals(other);

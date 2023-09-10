@@ -78,6 +78,24 @@ public class ProgrammeManager {
         }
     }
 
+    public void displayProgrammeList(HashMapInterface<String, Programme> p) {
+        Iterator<HashMap.Entry<String, Programme>> iterator = p.iterator();
+
+        System.out.printf("%-4s %-10s %-30s %-20s %-8s\n", "ID", "Code", "Name", "Programme Leader", "Duration");
+
+        while (iterator.hasNext()) {
+            HashMap.Entry<String, Programme> entry = iterator.next();
+            Programme prog = entry.getValue();
+
+            String id = entry.getKey();
+            String code = prog.getCode();
+            String name = prog.getName();
+            String programmeLeader = prog.getProgrammeLeader();
+            int duration = prog.getDuration();
+
+            System.out.printf("%-4s %-10s %-30s %-20s %-8s\n", id, code, name, programmeLeader, duration);
+        }
+    }
     public void displayAllProgramme(HashMapInterface<String, Programme> p){
         System.out.println(p);
         System.out.println("");
@@ -136,27 +154,6 @@ public class ProgrammeManager {
             System.out.printf("\n%-4s : %-4s %-30s",entry.getKey() , existProgCode , existProgName);
         }
     }
-    public TutorialGroup addTutGroup(HashMapInterface<String, Programme> p, String addTutID){
-        if (p.containsKey(addTutID)){
-            Programme addTutProg = p.get(addTutID);
-            String progCode = addTutProg.getCode();
 
-            System.out.println("Please enter year of study(Tutorial group): ");
-            int year = scan.nextInt();
-            System.out.println("Please enter semester of study(Tutorial group): ");
-            int sem = scan.nextInt();
-            System.out.println("Please enter tutorial group number: ");
-            int groupNum = scan.nextInt();
-
-            TutorialGroup addTutorialGroup = new TutorialGroup("",progCode,year, sem, groupNum);
-
-            return addTutorialGroup;
-        }
-        return null;
-    }
-    public void addProgTutGroup(String key,HashMapInterface<String, Programme> p, TutorialGroup t){
-        Programme programme = p.get(key);
-        programme.addTutGrp(programme.getTutTree(),t);
-    }
 
 }

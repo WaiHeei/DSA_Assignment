@@ -40,6 +40,19 @@ public class Tutor1 {
         return true;
     }
 
+    public boolean checkTutGroup(String tutGroupID){
+        Iterator<TutorialGroup> tutItr = tutGroup.getIterator();
+
+        int i = 1;
+
+        while (tutItr.hasNext()) {
+            TutorialGroup group = tutItr.next();
+            if (group.getTutorialGroupID().equals(tutGroupID)) {
+                return true;
+            }
+        }
+        return false;
+    }
     public void removeAllTutorialGroupInProgramme(String deleteProgrammeCode){
         Iterator<TutorialGroup> tutGroupIterator = tutGroup.getIterator();
 
@@ -448,6 +461,77 @@ public class Tutor1 {
             TutorialGroup group = tutItr.next();
             System.out.println(i++ + ". " + group);
         }
+    }
+
+    public void checkNull(){
+        Iterator<TutorialGroup> tutItr = tutGroup.getIterator();
+
+        while (tutItr.hasNext()) {
+            TutorialGroup group = tutItr.next();
+            if (group.getProgrammeId() == "") {
+                System.out.println(group);
+            }
+
+        } System.out.println("No more empty group!");
+    }
+
+    public TutorialGroup checkNullGroup(){
+        Iterator<TutorialGroup> tutItr = tutGroup.getIterator();
+
+        while (tutItr.hasNext()) {
+            TutorialGroup group = tutItr.next();
+            if (group.getProgrammeId() == "") {
+                return group;
+            }
+
+        } return null;
+    }
+
+    public Integer getTutGroupYearByID(String t){
+        Iterator<TutorialGroup> tutItr = tutGroup.getIterator();
+
+        while (tutItr.hasNext()) {
+            TutorialGroup group = tutItr.next();
+            if (group.getTutorialGroupID() .equals(t)) {
+                return group.getYear();
+            }
+
+        } return null;
+    }
+
+    public Integer getTutGroupSemByID(String t){
+        Iterator<TutorialGroup> tutItr = tutGroup.getIterator();
+
+        while (tutItr.hasNext()) {
+            TutorialGroup group = tutItr.next();
+            if (group.getTutorialGroupID() .equals(t)) {
+                return group.getSemester();
+            }
+
+        } return null;
+    }
+    public Integer getTutGroupNoByID(String t){
+        Iterator<TutorialGroup> tutItr = tutGroup.getIterator();
+
+        while (tutItr.hasNext()) {
+            TutorialGroup group = tutItr.next();
+            if (group.getTutorialGroupID() .equals(t)) {
+                return group.getGroupNo();
+            }
+
+        } return null;
+    }
+
+    public TutorialGroup getTutGroupByID(String t){
+        Iterator<TutorialGroup> tutItr = tutGroup.getIterator();
+
+        while (tutItr.hasNext()) {
+            TutorialGroup group = tutItr.next();
+            if (group.getTutorialGroupID() .equals(t)) {
+                return group;
+            }
+
+        } return null;
     }
 }
 

@@ -1,6 +1,7 @@
 import adt.HashMap;
 import adt.HashMapInterface;
 import adt.TreeSet;
+import adt.TreeSetInterface;
 import client.ProgrammeManager;
 import client.Tutor1;
 import entity.Programme;
@@ -30,10 +31,11 @@ public class driver {
         System.out.println("             3.  Search a programme                  ");
         System.out.println("             4.  Amend a programme                   ");
         System.out.println("             5.  List all programme                  ");
-        System.out.println("             6.  Add tutorial group to Programme     ");
-        System.out.println("             7.  Remove tutorial group from Programme");
-        System.out.println("             8.  Back to Main Menu                   ");
-        System.out.println("             9.  Add tutorial Group                  ");
+        System.out.println("             6.  Add tutorial Group                  ");
+        System.out.println("             7.  Add tutorial group to Programme     ");
+        System.out.println("             8.  Remove tutorial group from Programme");
+        System.out.println("             9.  Generate Report                     ");
+        System.out.println("             0.  Back to Main Menu                   ");
         System.out.println("=====================================================");
     }
 
@@ -98,7 +100,7 @@ public class driver {
         ProgrammeManager programmeManager = new ProgrammeManager(programmeList);
 
         //Create data
-        Programme programme1 = new Programme("P1", "RSW", "Software Engineering", "Bachelor in Software Engineering", "Ts. Lim Shen Huoy", 3);
+        Programme programme1 = new Programme("P1", "RSW", "Software Engineering", "Bachelor in Software Engineering", "Dr. Jason Wong", 3);
         Programme programme2 = new Programme("P2", "RDS", "Data Science", "Bachelor in Data Science", "Ts. Lim Shen Huoy", 3);
 
         programmeList.put(programme1.getId(), programme1);
@@ -267,30 +269,8 @@ public class driver {
                     } else if (pOption.equals("4")) {
                         programmeManager.editProgramme(programmeList);
                     } else if (pOption.equals("5")) {
-                        programmeManager.displayAllProgramme(programmeList);
+                        programmeManager.displayProgrammeList(programmeList);
                     } else if (pOption.equals("6")) {
-                        programmeManager.displayExistingProgramme(programmeList);
-
-                        System.out.println("\nEnter programme ID to add tutorial group: ");
-                        String addTutID = scanner.next();
-
-                        TutorialGroup grpToAdd = programmeManager.addTutGroup(programmeList, addTutID);
-
-                        if (grpToAdd != null){
-                            boolean performAdd = tutor.getTutGroup(addTutID);
-                            if (performAdd == true){
-                                TutorialGroup man = programmeManager.addTutGroup(programmeList,addTutID);
-                                programmeManager.addProgTutGroup(addTutID, programmeList,man);
-                            }
-                        }else {
-                            System.out.println("No such programme.");
-                        }
-
-                    } else if (pOption.equals("7")) {
-                        // Handle option 7
-                    }else if (pOption.equals("8")){
-                        cont = false;
-                    }else if (pOption.equals("9")){
                         tutor.printAllGroup();
                         System.out.println("Enter year: ");
                         int year = scanner.nextInt();
@@ -301,6 +281,45 @@ public class driver {
                         tutor.addTutorialGroup(tutGroup,"", year, sem, group );
                         System.out.println("");
                         tutor.printAllGroup();
+
+                    } else if (pOption.equals("7")) {
+                        programmeManager.displayExistingProgramme(programmeList);
+
+                        System.out.println("\nEnter programme ID to add tutorial group: ");
+                        String addTutID = scanner.next();
+                        tutor.checkNull();
+                        System.out.println("Enter the Tutorial Group ID to add: ");
+                        String tutGroupId = scanner.next();
+                        int newTutGrpYear = tutor.getTutGroupYearByID(tutGroupId);
+                        int newTutGrpSem = tutor.getTutGroupSemByID(tutGroupId);
+                        int newTutGrpNo = tutor.getTutGroupNoByID(tutGroupId);
+                        Programme newProgramme = programmeList.get(addTutID);
+                        TutorialGroup oldTutGrp = tutor.checkNullGroup();
+                        tutGroup.remove(oldTutGrp);
+                        String newProgrammeCode = programmeList.get(newProgramme.getId()).getCode();
+
+                        TutorialGroup newTutGrp = new TutorialGroup(tutGroupId, newProgrammeCode,newTutGrpYear, newTutGrpSem, newTutGrpNo);
+                        tutGroup.add(newTutGrp);
+
+                        System.out.println("Successfully Added!");
+
+                    }else if (pOption.equals("8")){
+                        tutor.printAllGroup();
+                        System.out.println("Enter Tutorial Group Id to remove: ");
+                        String removeID = scanner.next();
+                        if (tutor.checkTutGroup(removeID)) {
+                            TutorialGroup removeGroup = tutor.getTutGroupByID(removeID);
+                            tutGroup.remove(removeGroup);
+                            System.out.println("Successfully removed!");
+                        }else {
+                            System.out.println("No such tutorial group!");
+                        }
+                    }else if (pOption.equals("9")){
+                        programmeManager.displayAllProgramme(programmeList);
+
+
+                    }else if(pOption.equals("0")){
+                        cont = false;
                     }
                 } while (cont);
             } else if (mainMenuChoice == 2) {
