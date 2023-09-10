@@ -147,6 +147,7 @@ public class Tutor1 {
     public void addStudent(TutorialGroup tutGroup, int stdId, String stdName){
         Student stdToAdd = new Student(stdId,stdName);
         tutGroup.addStudent(stdToAdd);
+        //students.add(stdToAdd);
     }
 
     public boolean removeStudent(TutorialGroup tutGroup, Student student){

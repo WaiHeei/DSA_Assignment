@@ -67,16 +67,6 @@ public class driver {
         System.out.println("\n------------New Student Details------------");
     }
 
-    public static void summaryMenu(){
-        System.out.println("===========================================");
-        System.out.println("|            Generate Summary             |");
-        System.out.println("===========================================");
-        System.out.println("|           1. Tutorial Group             |");
-        System.out.println("|           2. Student                    |");
-        System.out.println("|           3. Exit                       |");
-        System.out.println("===========================================");
-    }
-
     public static void continueMenu(){
         System.out.println("\n==========================================");
         System.out.println("|           1. Continue                   |");
@@ -862,86 +852,49 @@ public class driver {
                         }
 
                     } else if (tutMenuChoice == 3) {
-                        summaryMenu();
-
-                        int menuChoice = 0;
-                        do {
-                            try {
-                                System.out.print("\nEnter your choice > ");
-                                menuChoice = scanner.nextInt();
-                                validCtnChoice = true;
-
-                                if (menuChoice < 1 || menuChoice > 2) {
-                                    System.out.println("Invalid input. Please enter number 1 to 3.");
-                                }
-                            } catch (InputMismatchException e) {
-                                System.out.println("Invalid input. Please enter a number.");
-                                scanner.next(); // discard the invalid input
-                                validCtnChoice = false;
-                            }
-                        } while (validCtnChoice == false);
-
-                        switch (menuChoice){
-                            case 1:
-                                System.out.println("=======================================");
-                                System.out.println("|      Tutorial Group     |   Count   |");
-                                System.out.println("=======================================");
-                                System.out.println("| Year 1 |         |      |     " + tutor.getYearCount(1) + "     |");
-                                System.out.println("|        | Sem 1   |      |     " + tutor.getSemCount(1, 1) + "     |");
-                                System.out.println("|        |         | G 1  |     " + tutor.getGroupCount(1,1, 1) + "     |");
-                                System.out.println("|        |         | G 2  |     "+ tutor.getGroupCount(1,1, 2) + "     |");
-                                System.out.println("|        |         | G 3  |     "+ tutor.getGroupCount(1,1, 3) + "     |");
-                                System.out.println("|        | Sem 2   |      |     " + tutor.getSemCount(1, 2) + "     |");
-                                System.out.println("|        |         | G 1  |     " + tutor.getGroupCount(1,2, 1) + "     |");
-                                System.out.println("|        |         | G 2  |     "+ tutor.getGroupCount(1,2, 2) + "     |");
-                                System.out.println("|        |         | G 3  |     "+ tutor.getGroupCount(1,2, 3) + "     |");
-                                System.out.println("|        | Sem 3   |      |     " + tutor.getSemCount(1, 3) + "     |");
-                                System.out.println("|        |         | G 1  |     " + tutor.getGroupCount(1,3, 1) + "     |");
-                                System.out.println("|        |         | G 2  |     "+ tutor.getGroupCount(1,3, 2) + "     |");
-                                System.out.println("|        |         | G 3  |     "+ tutor.getGroupCount(1,3, 3) + "     |");
-                                System.out.println("| Year 2 |         |      |     " + tutor.getYearCount(2) + "     |");
-                                System.out.println("|        | Sem 1   |      |     " + tutor.getSemCount(2, 1) + "     |");
-                                System.out.println("|        |         | G 1  |     " + tutor.getGroupCount(2,1, 1) + "     |");
-                                System.out.println("|        |         | G 2  |     "+ tutor.getGroupCount(2,1, 2) + "     |");
-                                System.out.println("|        |         | G 3  |     "+ tutor.getGroupCount(2,1, 3) + "     |");
-                                System.out.println("|        | Sem 2   |      |     " + tutor.getSemCount(2, 2) + "     |");
-                                System.out.println("|        |         | G 1  |     " + tutor.getGroupCount(2,2, 1) + "     |");
-                                System.out.println("|        |         | G 2  |     "+ tutor.getGroupCount(2,2, 2) + "     |");
-                                System.out.println("|        |         | G 3  |     "+ tutor.getGroupCount(2,2, 3) + "     |");
-                                System.out.println("|        | Sem 3   |      |     " + tutor.getSemCount(2, 3) + "     |");
-                                System.out.println("|        |         | G 1  |     " + tutor.getGroupCount(2,3, 1) + "     |");
-                                System.out.println("|        |         | G 2  |     "+ tutor.getGroupCount(2,3, 2) + "     |");
-                                System.out.println("|        |         | G 3  |     "+ tutor.getGroupCount(2,3, 3) + "     |");
-                                System.out.println("| Year 3 |         |      |     " + tutor.getYearCount(3) + "     |");
-                                System.out.println("|        | Sem 1   |      |     " + tutor.getSemCount(3, 1) + "     |");
-                                System.out.println("|        |         | G 1  |     " + tutor.getGroupCount(3,1, 1) + "     |");
-                                System.out.println("|        |         | G 2  |     "+ tutor.getGroupCount(3,1, 2) + "     |");
-                                System.out.println("|        |         | G 3  |     "+ tutor.getGroupCount(3,1, 3) + "     |");
-                                System.out.println("|        | Sem 2   |      |     " + tutor.getSemCount(3, 2) + "     |");
-                                System.out.println("|        |         | G 1  |     " + tutor.getGroupCount(3,2, 1) + "     |");
-                                System.out.println("|        |         | G 2  |     "+ tutor.getGroupCount(3,2, 2) + "     |");
-                                System.out.println("|        |         | G 3  |     "+ tutor.getGroupCount(3,2, 3) + "     |");
-                                System.out.println("|        | Sem 3   |      |     " + tutor.getSemCount(3, 3) + "     |");
-                                System.out.println("|        |         | G 1  |     " + tutor.getGroupCount(3,3, 1) + "     |");
-                                System.out.println("|        |         | G 2  |     "+ tutor.getGroupCount(3,3, 2) + "     |");
-                                System.out.println("|        |         | G 3  |     "+ tutor.getGroupCount(3,3, 3) + "     |");
-                                System.out.println("|-------------------------------------|");
-                                break;
-                            case 2:
-                                System.out.println("-----------------------------------");
-                                System.out.println("|     Category            Count   |");
-                                System.out.println("-----------------------------------");
-                                System.out.println("|      Year 1               " + tutor.getStudentCount(1)+ "    |");
-                                System.out.println("|      Year 2               " + tutor.getStudentCount(1)+ "    |");
-                                System.out.println("|      Year 3               " + tutor.getStudentCount(1)+ "    |");
-                                System.out.println("-----------------------------------");
-                                System.out.println("|      Total                " + tutor.getStudentCount() + "    |");
-                                System.out.println("-----------------------------------");
-
-                                break;
-                            case 3:
-                                break;
-                        }
+                        System.out.println("=======================================");
+                        System.out.println("|      Tutorial Group     |   Count   |");
+                        System.out.println("=======================================");
+                        System.out.println("| Year 1 |         |      |     " + tutor.getYearCount(1) + "     |");
+                        System.out.println("|        | Sem 1   |      |     " + tutor.getSemCount(1, 1) + "     |");
+                        System.out.println("|        |         | G 1  |     " + tutor.getGroupCount(1,1, 1) + "     |");
+                        System.out.println("|        |         | G 2  |     "+ tutor.getGroupCount(1,1, 2) + "     |");
+                        System.out.println("|        |         | G 3  |     "+ tutor.getGroupCount(1,1, 3) + "     |");
+                        System.out.println("|        | Sem 2   |      |     " + tutor.getSemCount(1, 2) + "     |");
+                        System.out.println("|        |         | G 1  |     " + tutor.getGroupCount(1,2, 1) + "     |");
+                        System.out.println("|        |         | G 2  |     "+ tutor.getGroupCount(1,2, 2) + "     |");
+                        System.out.println("|        |         | G 3  |     "+ tutor.getGroupCount(1,2, 3) + "     |");
+                        System.out.println("|        | Sem 3   |      |     " + tutor.getSemCount(1, 3) + "     |");
+                        System.out.println("|        |         | G 1  |     " + tutor.getGroupCount(1,3, 1) + "     |");
+                        System.out.println("|        |         | G 2  |     "+ tutor.getGroupCount(1,3, 2) + "     |");
+                        System.out.println("|        |         | G 3  |     "+ tutor.getGroupCount(1,3, 3) + "     |");
+                        System.out.println("| Year 2 |         |      |     " + tutor.getYearCount(2) + "     |");
+                        System.out.println("|        | Sem 1   |      |     " + tutor.getSemCount(2, 1) + "     |");
+                        System.out.println("|        |         | G 1  |     " + tutor.getGroupCount(2,1, 1) + "     |");
+                        System.out.println("|        |         | G 2  |     "+ tutor.getGroupCount(2,1, 2) + "     |");
+                        System.out.println("|        |         | G 3  |     "+ tutor.getGroupCount(2,1, 3) + "     |");
+                        System.out.println("|        | Sem 2   |      |     " + tutor.getSemCount(2, 2) + "     |");
+                        System.out.println("|        |         | G 1  |     " + tutor.getGroupCount(2,2, 1) + "     |");
+                        System.out.println("|        |         | G 2  |     "+ tutor.getGroupCount(2,2, 2) + "     |");
+                        System.out.println("|        |         | G 3  |     "+ tutor.getGroupCount(2,2, 3) + "     |");
+                        System.out.println("|        | Sem 3   |      |     " + tutor.getSemCount(2, 3) + "     |");
+                        System.out.println("|        |         | G 1  |     " + tutor.getGroupCount(2,3, 1) + "     |");
+                        System.out.println("|        |         | G 2  |     "+ tutor.getGroupCount(2,3, 2) + "     |");
+                        System.out.println("|        |         | G 3  |     "+ tutor.getGroupCount(2,3, 3) + "     |");
+                        System.out.println("| Year 3 |         |      |     " + tutor.getYearCount(3) + "     |");
+                        System.out.println("|        | Sem 1   |      |     " + tutor.getSemCount(3, 1) + "     |");
+                        System.out.println("|        |         | G 1  |     " + tutor.getGroupCount(3,1, 1) + "     |");
+                        System.out.println("|        |         | G 2  |     "+ tutor.getGroupCount(3,1, 2) + "     |");
+                        System.out.println("|        |         | G 3  |     "+ tutor.getGroupCount(3,1, 3) + "     |");
+                        System.out.println("|        | Sem 2   |      |     " + tutor.getSemCount(3, 2) + "     |");
+                        System.out.println("|        |         | G 1  |     " + tutor.getGroupCount(3,2, 1) + "     |");
+                        System.out.println("|        |         | G 2  |     "+ tutor.getGroupCount(3,2, 2) + "     |");
+                        System.out.println("|        |         | G 3  |     "+ tutor.getGroupCount(3,2, 3) + "     |");
+                        System.out.println("|        | Sem 3   |      |     " + tutor.getSemCount(3, 3) + "     |");
+                        System.out.println("|        |         | G 1  |     " + tutor.getGroupCount(3,3, 1) + "     |");
+                        System.out.println("|        |         | G 2  |     "+ tutor.getGroupCount(3,3, 2) + "     |");
+                        System.out.println("|        |         | G 3  |     "+ tutor.getGroupCount(3,3, 3) + "     |");
+                        System.out.println("|-------------------------------------|");
 
                     } else if (tutMenuChoice == 4) {
 
