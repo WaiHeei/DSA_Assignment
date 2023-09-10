@@ -414,5 +414,40 @@ public class Tutor1 {
         }
         return count;
     }
+
+    public void addTutorialGroup(TreeSet<TutorialGroup> tutGroup, String programmeCode, int year, int semester, int groupNo) {
+        int newTID = 0;
+        String addTutorialGroupID = null;
+
+        while (true) {
+            String newId = "TG" + (tutGroup.size() + 1 + newTID);
+
+            if (!tutGroup.contains(new TutorialGroup(newId, programmeCode, year, semester, groupNo))) {
+                addTutorialGroupID = newId;
+                break;
+            } else {
+                newTID++;
+            }
+        }
+
+        TutorialGroup newTutorialGroup = new TutorialGroup(addTutorialGroupID, programmeCode, year, semester, groupNo);
+        tutGroup.add(newTutorialGroup);
+
+        System.out.println("Tutorial Group " + addTutorialGroupID + " has been added successfully!");
+    }
+
+    public void printAllGroup() {
+        System.out.println("==================================");
+        System.out.println("|        Tutorial Groups         | ");
+        System.out.println("==================================");
+
+        Iterator<TutorialGroup> tutItr = tutGroup.getIterator();
+
+        int i = 1;
+        while (tutItr.hasNext()) {
+            TutorialGroup group = tutItr.next();
+            System.out.println(i++ + ". " + group);
+        }
+    }
 }
 

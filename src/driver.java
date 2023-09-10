@@ -33,6 +33,7 @@ public class driver {
         System.out.println("             6.  Add tutorial group to Programme     ");
         System.out.println("             7.  Remove tutorial group from Programme");
         System.out.println("             8.  Back to Main Menu                   ");
+        System.out.println("             9.  Add tutorial Group                  ");
         System.out.println("=====================================================");
     }
 
@@ -166,13 +167,13 @@ public class driver {
         student.add(student29);
         student.add(student30);
 
-        TutorialGroup tutGrp1 = new TutorialGroup(programmeList.get(programme1.getId()).getCode(), 1, 1, 1);
-        TutorialGroup tutGrp2 = new TutorialGroup(programmeList.get(programme1.getId()).getCode(), 2, 2, 3);
-        TutorialGroup tutGrp3 = new TutorialGroup(programmeList.get(programme1.getId()).getCode(), 3, 1, 2);
+        TutorialGroup tutGrp1 = new TutorialGroup("TG1",programmeList.get(programme1.getId()).getCode(), 1, 1, 1);
+        TutorialGroup tutGrp2 = new TutorialGroup("TG2",programmeList.get(programme1.getId()).getCode(), 2, 2, 3);
+        TutorialGroup tutGrp3 = new TutorialGroup("TG3",programmeList.get(programme1.getId()).getCode(), 3, 1, 2);
 
-        TutorialGroup tutGrp4 = new TutorialGroup(programmeList.get(programme2.getId()).getCode(), 1, 2, 3);
-        TutorialGroup tutGrp5 = new TutorialGroup(programmeList.get(programme2.getId()).getCode(), 2, 3, 2);
-        TutorialGroup tutGrp6 = new TutorialGroup(programmeList.get(programme2.getId()).getCode(), 3, 1, 1);
+        TutorialGroup tutGrp4 = new TutorialGroup("TG4",programmeList.get(programme2.getId()).getCode(), 1, 2, 3);
+        TutorialGroup tutGrp5 = new TutorialGroup("TG5",programmeList.get(programme2.getId()).getCode(), 2, 3, 2);
+        TutorialGroup tutGrp6 = new TutorialGroup("TG6",programmeList.get(programme2.getId()).getCode(), 3, 1, 1);
 
         tutGroup.add(tutGrp1);
         tutGroup.add(tutGrp2);
@@ -289,6 +290,17 @@ public class driver {
                         // Handle option 7
                     }else if (pOption.equals("8")){
                         cont = false;
+                    }else if (pOption.equals("9")){
+                        tutor.printAllGroup();
+                        System.out.println("Enter year: ");
+                        int year = scanner.nextInt();
+                        System.out.println("Enter Sem: ");
+                        int sem = scanner.nextInt();
+                        System.out.println("Enter group: ");
+                        int group = scanner.nextInt();
+                        tutor.addTutorialGroup(tutGroup,"", year, sem, group );
+                        System.out.println("");
+                        tutor.printAllGroup();
                     }
                 } while (cont);
             } else if (mainMenuChoice == 2) {

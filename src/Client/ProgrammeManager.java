@@ -148,7 +148,7 @@ public class ProgrammeManager {
             System.out.println("Please enter tutorial group number: ");
             int groupNum = scan.nextInt();
 
-            TutorialGroup addTutorialGroup = new TutorialGroup(progCode,year, sem, groupNum);
+            TutorialGroup addTutorialGroup = new TutorialGroup("",progCode,year, sem, groupNum);
 
             return addTutorialGroup;
         }

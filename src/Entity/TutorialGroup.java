@@ -7,13 +7,15 @@ import adt.TreeSet;
 import adt.TreeSetInterface;
 
 public class TutorialGroup implements Comparable<TutorialGroup>{
+    private String tutorialGroupID;
     private String programmeCode;
     private int year;
     private int semester;
     private int groupNo;
     private TreeSetInterface<Student> students;
 
-    public TutorialGroup(String programmeCode, int year, int semester, int groupNo) {
+    public TutorialGroup(String tutorialGroupID,String programmeCode, int year, int semester, int groupNo) {
+        this.tutorialGroupID = tutorialGroupID;
         this.programmeCode = programmeCode;
         this.year = year;
         this.semester = semester;
@@ -22,6 +24,15 @@ public class TutorialGroup implements Comparable<TutorialGroup>{
     }
 
     //Getter and Setter
+
+    public String getTutorialGroupID() {
+        return tutorialGroupID;
+    }
+
+    public void setTutorialGroupID(String tutorialGroupID) {
+        this.tutorialGroupID = tutorialGroupID;
+    }
+
     public String getProgrammeId() {
         return programmeCode;
     }
@@ -64,18 +75,21 @@ public class TutorialGroup implements Comparable<TutorialGroup>{
 
     @Override
     public String toString() {
-        return "Tutorial Group : " + programmeCode + " Y" + year + " S" + semester + " G" + groupNo;
+        return "Tutorial Group : "+ tutorialGroupID +" " + programmeCode + " Y" + year + " S" + semester + " G" + groupNo;
     }
 
     @Override
     public int compareTo(TutorialGroup other) {
-        int result = this.programmeCode.compareTo(other.programmeCode);
+        int result = this.tutorialGroupID.compareTo(other.tutorialGroupID);
         if (result == 0) {
-            result = Integer.compare(this.year, other.year);
+            this.programmeCode.compareTo(other.programmeCode);
             if (result == 0) {
-                result = Integer.compare(this.semester, other.semester);
+                result = Integer.compare(this.year, other.year);
                 if (result == 0) {
-                    result = Integer.compare(this.groupNo, other.groupNo);
+                    result = Integer.compare(this.semester, other.semester);
+                    if (result == 0) {
+                        result = Integer.compare(this.groupNo, other.groupNo);
+                    }
                 }
             }
         }
