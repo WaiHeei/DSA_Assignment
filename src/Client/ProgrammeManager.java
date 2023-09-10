@@ -1,8 +1,12 @@
 package client;
 
+import adt.TreeSet;
 import entity.Programme;
 import adt.HashMap;
 import adt.HashMapInterface;
+import client.Tutor1;
+
+
 import java.util.Scanner;
 
 public class ProgrammeManager {
@@ -31,14 +35,19 @@ public class ProgrammeManager {
         p.put(programme.getId(), programme);
     }
 
-    public void deleteProgramme(HashMapInterface<String, Programme> p){
+    public String deleteProgramme(HashMapInterface<String, Programme> p){
         System.out.println("Please enter programme ID that you want to delete: ");
         String deleteProgrammeID = scan.nextLine();
 
         if (p.containsKey(deleteProgrammeID)) {
+            Programme a = p.get(deleteProgrammeID);
+            String pCode = a.getCode();
+
             p.remove(deleteProgrammeID);
+            return pCode;
         } else {
             System.out.println(deleteProgrammeID + " does not exist in the Programme! ");
+            return null;
         }
     }
 

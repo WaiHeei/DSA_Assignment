@@ -7,14 +7,14 @@ import adt.TreeSet;
 import adt.TreeSetInterface;
 
 public class TutorialGroup implements Comparable<TutorialGroup>{
-    private String programmeId;
+    private String programmeCode;
     private int year;
     private int semester;
     private int groupNo;
     private TreeSetInterface<Student> students;
 
-    public TutorialGroup(String programmeId, int year, int semester, int groupNo) {
-        this.programmeId = programmeId;
+    public TutorialGroup(String programmeCode, int year, int semester, int groupNo) {
+        this.programmeCode = programmeCode;
         this.year = year;
         this.semester = semester;
         this.groupNo = groupNo;
@@ -23,11 +23,11 @@ public class TutorialGroup implements Comparable<TutorialGroup>{
 
     //Getter and Setter
     public String getProgrammeId() {
-        return programmeId;
+        return programmeCode;
     }
 
     public void setProgrammeId(String programmeId) {
-        this.programmeId = programmeId;
+        this.programmeCode = programmeId;
     }
 
     public int getGroupNo() {
@@ -66,12 +66,12 @@ public class TutorialGroup implements Comparable<TutorialGroup>{
 
     @Override
     public String toString() {
-        return "Tutorial Group : " + programmeId + " Y" + year + " S" + semester + " G" + groupNo;
+        return "Tutorial Group : " + programmeCode + " Y" + year + " S" + semester + " G" + groupNo;
     }
 
     @Override
     public int compareTo(TutorialGroup other) {
-        int result = this.programmeId.compareTo(other.programmeId);
+        int result = this.programmeCode.compareTo(other.programmeCode);
         if (result == 0) {
             result = Integer.compare(this.year, other.year);
             if (result == 0) {

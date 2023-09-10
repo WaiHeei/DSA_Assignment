@@ -3,8 +3,10 @@ package client;
 /*Name : Leng Yen Rou
 ID : 220WMR04092*/
 
+import adt.HashMap;
 import adt.TreeSet;
 import adt.TreeSetInterface;
+import entity.Programme;
 import entity.Student;
 import entity.TutorialGroup;
 
@@ -15,6 +17,7 @@ import java.util.Scanner;
 public class Tutor1 {
     private TreeSet<Student> students;
     private TreeSet<TutorialGroup> tutGroup;
+    private HashMap<String , Programme> programme;
     Scanner scanner = new Scanner(System.in);
 
     public Tutor1(TreeSet<Student> students, TreeSet<TutorialGroup> tutGroup) {
@@ -22,16 +25,18 @@ public class Tutor1 {
         this.tutGroup = tutGroup;
     }
 
-//    public void removeAllTutorialGroupInProgramme(String deleteProgrammeID){
-//        Iterator<TutorialGroup> tutGroupIterator = tutGroup.getIterator();
-//
-//        while (tutGroupIterator.hasNext()) {
-//            TutorialGroup group = tutGroupIterator.next();
-//            if (group.getProgrammeId().equals(deleteProgramCode)) {
-//                tutGroupIterator.remove(); // Remove the matching tutorial group
-//            }
-//        }
-//    }
+    public void removeAllTutorialGroupInProgramme(String deleteProgrammeCode){
+        Iterator<TutorialGroup> tutGroupIterator = tutGroup.getIterator();
+
+        if (deleteProgrammeCode != null){
+            while (tutGroupIterator.hasNext()) {
+                TutorialGroup group = tutGroupIterator.next();
+                if (group.getProgrammeId().equals(deleteProgrammeCode)) {
+                    tutGroup.remove(group); // Remove the matching tutorial group
+                }
+            }
+        }
+    }
 
     public TutorialGroup displayTutorialGroup(){
         System.out.println("==================================");
@@ -319,6 +324,79 @@ public class Tutor1 {
         if (!found) {
             System.out.println("No tutorial groups found for Group " + groupNo + ".");
         }
+    }
+
+    public int getYearCount(int year){
+        int count = 0;
+        boolean found = false;
+        Iterator<TutorialGroup> tutItr = tutGroup.getIterator();
+
+        while (tutItr.hasNext()) {
+            TutorialGroup group = tutItr.next();
+            if (group.getYear() == year) {
+                count++;
+                found = true;
+            }
+        }
+        return count;
+    }
+
+    public int getSemCount(int year, int sem){
+        int count = 0;
+        boolean found = false;
+        Iterator<TutorialGroup> tutItr = tutGroup.getIterator();
+
+        while (tutItr.hasNext()) {
+            TutorialGroup group = tutItr.next();
+            if (group.getYear() == year && group.getSemester() == sem) {
+                count++;
+                found = true;
+            }
+        }
+        return count;
+    }
+
+    public int getGroupCount(int year, int sem, int groupNo){
+        int count = 0;
+        boolean found = false;
+        Iterator<TutorialGroup> tutItr = tutGroup.getIterator();
+
+        while (tutItr.hasNext()) {
+            TutorialGroup group = tutItr.next();
+            if (group.getYear() == year && group.getSemester() == sem && group.getGroupNo() == groupNo) {
+                count++;
+                found = true;
+            }
+        }
+        return count;
+    }
+
+    public int getStudentCount(){
+        int count = 0;
+        boolean found = false;
+        Iterator<Student> studentIterator = students.getIterator();
+
+        while (studentIterator.hasNext()) {
+            Student std = studentIterator.next();
+            count++;
+            found = true;
+        }
+        return count;
+    }
+
+    public int getStudentCount(int year){
+        int count = 0;
+        boolean found = false;
+        Iterator<TutorialGroup> tutItr = tutGroup.getIterator();
+
+        while (tutItr.hasNext()){
+            TutorialGroup group = tutItr.next();
+            if (group.getYear() == year){
+                count += group.getStudents().size();
+                found = true;
+            }
+        }
+        return count;
     }
 }
 
