@@ -10,6 +10,7 @@ public class Programme {
     private String description;
     private String programmeLeader;
     private int duration;
+    private TutorialGroup tutorialGroup;
 
 
     //Constructor
@@ -24,6 +25,18 @@ public class Programme {
         this.description = description;
         this.programmeLeader = programmeLeader;
         this.duration = duration;
+    }
+    public Programme(String id, String code, String name, String description, String programmeLeader, int duration, TutorialGroup[] tutorialGroup){
+        this.id = id;
+        this.code = code;
+        this.name = name;
+        this.description = description;
+        this.programmeLeader = programmeLeader;
+        this.duration = duration;
+    }
+
+    public Programme(TutorialGroup tutorialGroup){
+        this.tutorialGroup = tutorialGroup;
     }
 
     //Setter
@@ -51,6 +64,10 @@ public class Programme {
         this.code = code;
     }
 
+    public void setTutorialGroup(TutorialGroup tutorialGroup) {
+        this.tutorialGroup = tutorialGroup;
+    }
+
     //Getter
     public String getId() {
         return id;
@@ -76,6 +93,10 @@ public class Programme {
         return duration;
     }
 
+    public TutorialGroup getTutorialGroup() {
+        return tutorialGroup;
+    }
+
     @Override
     public String toString() {
         return "Programme ID: " + id +"\n" +
@@ -83,7 +104,9 @@ public class Programme {
                 "Programme Name: " + name + "\n" +
                 "Programme Description: " + description + "\n" +
                 "Programme Leader: " + programmeLeader + "\n" +
-                "Duration: " + duration;
+                "Duration: " + duration + "\n" +
+                "Tutorial Group: " + tutorialGroup ;
+
     }
 }
 

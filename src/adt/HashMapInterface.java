@@ -1,5 +1,7 @@
 package adt;
 
+import java.util.Iterator;
+
 public interface HashMapInterface<K, V> {
     //Associates value to the specified key
     void put(K key, V value);
@@ -24,4 +26,8 @@ public interface HashMapInterface<K, V> {
 
     //Remove all the mapping
     void clear();
+
+    public Iterator<HashMap.Entry<K, V>> iterator();
+
+
 }

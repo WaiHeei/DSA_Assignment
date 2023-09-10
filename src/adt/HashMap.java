@@ -1,5 +1,8 @@
 package adt;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 public class HashMap<K, V> implements  HashMapInterface<K, V>{
     public static final int CAPACITY = 20;
     private int size;
@@ -139,6 +142,91 @@ public class HashMap<K, V> implements  HashMapInterface<K, V>{
             }
             size = 0;
         }
+
+    // Define your Iterator inner class
+    private class HashMapIterator implements Iterator<Entry<K, V>> {
+        private int currentIndex = 0;
+        private Entry<K, V> currentEntry = null;
+
+        @Override
+        public boolean hasNext() {
+            // Check if there is another entry in the table
+            while (currentIndex < CAPACITY) {
+                if (table[currentIndex] != null) {
+                    return true;
+                }
+                currentIndex++;
+            }
+            return false;
+        }
+
+        @Override
+        public Entry<K, V> next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+
+            // Find the next non-null entry
+            while (table[currentIndex] == null) {
+                currentIndex++;
+            }
+
+            // Store the current entry and move to the next
+            currentEntry = table[currentIndex];
+            currentIndex++;
+
+            return currentEntry;
+        }
+
+        @Override
+        public void remove() {
+            if (currentEntry == null) {
+                throw new IllegalStateException("next() has not been called, or the element has already been removed.");
+            }
+
+            // Implement the remove operation (optional)
+            // You can remove the currentEntry from the hashmap here if needed.
+            // Example: HashMap.this.remove(currentEntry.getKey());
+
+            currentEntry = null; // Reset currentEntry
+        }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("");
+        boolean first = true;
+
+        for (int i = 0; i < CAPACITY; i++) {
+            Entry<K, V> e = table[i];
+
+            while (e != null) {
+                if (!first) {
+                    sb.append("\n \n");
+                } else {
+                    first = false;
+                }
+
+                sb.append("");
+                sb.append(e.getValue());
+
+                e = e.next;
+            }
+        }
+
+        sb.append("");
+
+        return sb.toString();
+    }
+
+    // Implement the iterator() method to return an instance of your iterator
+    @Override
+    public Iterator<Entry<K, V>> iterator() {
+        return new HashMapIterator();
+    }
+
 
 }
 

@@ -1,54 +1,72 @@
 package client;
 
-import adt.TreeSet;
-import entity.Programme;
 import adt.HashMap;
+import entity.Programme;
 import adt.HashMapInterface;
-import client.Tutor1;
+import entity.TutorialGroup;
 
 
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class ProgrammeManager {
     private HashMapInterface<String, Programme> p;
+
 
     public ProgrammeManager(HashMapInterface<String, Programme> p){
         this.p = p;
     }
 
     static Scanner scan = new Scanner(System.in);
-    public static boolean cont = true;
-
     public void addProgramme(HashMapInterface<String, Programme> p){
-        String addProgrammeID = "FOCS" + (p.size() + 1);
+        int newIDR = 0;
+        String addProgrammeID = null;
+
+        while (true) {
+            String newId = "P" + (p.size() + 1 + newIDR);
+
+            if (!p.containsKey(newId)) {
+                addProgrammeID = newId;
+                break;
+            } else {
+                newIDR++;
+            }
+        }
+
         System.out.println("Please enter programme code: ");
         String programmeCode = scan.nextLine();
+
         System.out.println("Please enter programme name: ");
         String programmeName = scan.nextLine();
+
         System.out.println("Please enter programme description: ");
         String programmeDesc = scan.nextLine();
+
         System.out.println("Please enter programme programmeLeader: ");
         String programmeLeader = scan.nextLine();
+
         System.out.println("Please enter programme duration: ");
         int programmeDuration = scan.nextInt();
+
         Programme programme = new Programme(addProgrammeID, programmeCode, programmeName, programmeDesc, programmeLeader, programmeDuration);
         p.put(programme.getId(), programme);
+        Programme a = p.get(addProgrammeID);
+        String addCode = a.getCode();
+        System.out.println( addCode + " has been added successfully!");
     }
 
     public String deleteProgramme(HashMapInterface<String, Programme> p){
         System.out.println("Please enter programme ID that you want to delete: ");
-        String deleteProgrammeID = scan.nextLine();
+        String deleteProgrammeID = scan.next();
 
         if (p.containsKey(deleteProgrammeID)) {
-            Programme a = p.get(deleteProgrammeID);
-            String pCode = a.getCode();
-
             p.remove(deleteProgrammeID);
-            return pCode;
+            System.out.println(deleteProgrammeID + " has been successfully deleted! Press Enter to continue.");
+
         } else {
             System.out.println(deleteProgrammeID + " does not exist in the Programme! ");
-            return null;
         }
+        return deleteProgrammeID;
     }
 
     public void searchProgramme(HashMapInterface<String, Programme> p){
@@ -63,17 +81,9 @@ public class ProgrammeManager {
     }
 
     public void displayAllProgramme(HashMapInterface<String, Programme> p){
-        int index = 1;
-        System.out.printf("%-2s %-3s %-25s %-35s %-20s %-8s \n", "", "Code", "Name", "Description", "Programme Leader", "Duration");
-        for (int i = 1; i <= p.size(); i++) {
-            String key = Integer.toString(i);
-            Programme programme = p.get("FOCS" + key);
-            if (programme != null) {
-                System.out.printf("%-2d %-4s %-25s %-35s %-20s %-1d \n", index, programme.getCode(), programme.getName(), programme.getDescription(),
-                        programme.getProgrammeLeader(), programme.getDuration());
-            }
-            index++;
-        }
+        System.out.println(p);
+        System.out.println("");
+        System.out.println("Press Enter to continue.");
     }
 
     public void editProgramme(HashMapInterface<String , Programme> p){
@@ -115,6 +125,38 @@ public class ProgrammeManager {
         } else {
             System.out.println(editProgrammeID + " does not exist in the Programme! ");
         }
+    }
+
+    public void addTutGroup(HashMapInterface<String, Programme> p){
+        Iterator<HashMap.Entry<String, Programme>> iterator = p.iterator();
+        System.out.printf("%-4s : %-4s %-30s","ID" , "Code" , "Name");
+        while (iterator.hasNext()){
+            HashMap.Entry<String, Programme> entry = iterator.next();
+            Programme prog = entry.getValue();
+            String existProgCode = prog.getCode();
+            String existProgName = prog.getName();
+            System.out.printf("\n%-4s : %-4s %-30s",entry.getKey() , existProgCode , existProgName);
+        }
+        System.out.println("\nEnter programme ID to add tutorial group: ");
+        String addTutID = scan.nextLine();
+
+        if (p.containsKey(addTutID)){
+            Programme addTutProg = p.get(addTutID);
+            String progCode = addTutProg.getCode();
+
+            System.out.println("Please enter year of study(Tutorial group): ");
+            int year = scan.nextInt();
+            System.out.println("Please enter semester of study(Tutorial group): ");
+            int sem = scan.nextInt();
+            System.out.println("Please enter tutorial group number: ");
+            int groupNum = scan.nextInt();
+
+
+            TutorialGroup addTutorialGroup = new TutorialGroup(progCode,year, sem, groupNum);
+            addTutProg.setTutorialGroup(addTutorialGroup);
+        }
+
+
     }
 
 }

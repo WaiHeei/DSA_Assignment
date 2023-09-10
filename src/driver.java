@@ -30,6 +30,9 @@ public class driver {
         System.out.println("             3.  Search a programme                  ");
         System.out.println("             4.  Amend a programme                   ");
         System.out.println("             5.  List all programme                  ");
+        System.out.println("             6.  Add tutorial group to Programme     ");
+        System.out.println("             7.  Remove tutorial group from Programme");
+        System.out.println("             8.  Back to Main Menu                   ");
         System.out.println("=====================================================");
     }
 
@@ -104,8 +107,8 @@ public class driver {
         ProgrammeManager programmeManager = new ProgrammeManager(programmeList);
 
         //Create data
-        Programme programme1 = new Programme("FOCS1", "RSW", "Software Engineering", "Bachelor in Software Engineering", "Ts. Lim Shen Huoy", 3);
-        Programme programme2 = new Programme("FOCS2", "RDS", "Data Science", "Bachelor in Data Science", "Ts. Lim Shen Huoy", 3);
+        Programme programme1 = new Programme("P1", "RSW", "Software Engineering", "Bachelor in Software Engineering", "Ts. Lim Shen Huoy", 3);
+        Programme programme2 = new Programme("P2", "RDS", "Data Science", "Bachelor in Data Science", "Ts. Lim Shen Huoy", 3);
 
         programmeList.put(programme1.getId(), programme1);
         programmeList.put(programme2.getId(), programme2);
@@ -227,6 +230,10 @@ public class driver {
         tutGrp6.addStudent(student29);
         tutGrp6.addStudent(student30);
 
+        //add tut group to programme
+        programme1.setTutorialGroup(tutGrp1);
+        programme2.setTutorialGroup(tutGrp2);
+
         Scanner scanner = new Scanner(System.in);
 
 
@@ -258,10 +265,10 @@ public class driver {
 
             if (mainMenuChoice == 1){
 
-                while (cont = true) {
+                do {
                     scanner.nextLine();
                     programmeMenu();
-                    String pOption = scanner.nextLine();
+                    String pOption = scanner.next();
 
                     if (pOption.equals("1")) {
                         programmeManager.addProgramme(programmeList);
@@ -274,12 +281,14 @@ public class driver {
                         programmeManager.editProgramme(programmeList);
                     } else if (pOption.equals("5")) {
                         programmeManager.displayAllProgramme(programmeList);
-                    }else if (pOption.equals("6")) {
-
-                    }else if (pOption.equals("7")) {
-
+                    } else if (pOption.equals("6")) {
+                        programmeManager.addTutGroup(programmeList);
+                    } else if (pOption.equals("7")) {
+                        // Handle option 7
+                    }else if (pOption.equals("8")){
+                        cont = false;
                     }
-                }
+                } while (cont);
             } else if (mainMenuChoice == 2) {
                 do {
                     tutMenu();
