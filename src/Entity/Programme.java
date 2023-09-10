@@ -1,6 +1,10 @@
 package entity;
 
 
+import adt.HashMapInterface;
+import adt.TreeSet;
+import adt.TreeSetInterface;
+
 public class Programme {
 
     //Programme data
@@ -10,7 +14,8 @@ public class Programme {
     private String description;
     private String programmeLeader;
     private int duration;
-    private TutorialGroup tutorialGroup;
+    private TreeSetInterface<TutorialGroup> tutorialGroup;
+    private TutorialGroup tutGrp;
 
 
     //Constructor
@@ -25,6 +30,7 @@ public class Programme {
         this.description = description;
         this.programmeLeader = programmeLeader;
         this.duration = duration;
+        this.tutorialGroup = new TreeSet<>();
     }
     public Programme(String id, String code, String name, String description, String programmeLeader, int duration, TutorialGroup[] tutorialGroup){
         this.id = id;
@@ -35,7 +41,7 @@ public class Programme {
         this.duration = duration;
     }
 
-    public Programme(TutorialGroup tutorialGroup){
+    public Programme(TreeSetInterface tutorialGroup){
         this.tutorialGroup = tutorialGroup;
     }
 
@@ -64,10 +70,6 @@ public class Programme {
         this.code = code;
     }
 
-    public void setTutorialGroup(TutorialGroup tutorialGroup) {
-        this.tutorialGroup = tutorialGroup;
-    }
-
     //Getter
     public String getId() {
         return id;
@@ -93,8 +95,12 @@ public class Programme {
         return duration;
     }
 
-    public TutorialGroup getTutorialGroup() {
-        return tutorialGroup;
+    public void setTutorialGroup(TutorialGroup tutorialGroup){
+        this.tutGrp = tutGrp;
+    }
+
+    public void addTutGrp(HashMapInterface p, TreeSetInterface t){
+
     }
 
     @Override
@@ -105,7 +111,7 @@ public class Programme {
                 "Programme Description: " + description + "\n" +
                 "Programme Leader: " + programmeLeader + "\n" +
                 "Duration: " + duration + "\n" +
-                "Tutorial Group: " + tutorialGroup ;
+                  tutGrp.toString() ;
 
     }
 }

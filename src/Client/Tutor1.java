@@ -25,6 +25,21 @@ public class Tutor1 {
         this.tutGroup = tutGroup;
     }
 
+    public boolean getTutGroup(String programmeId){
+        Iterator<TutorialGroup> tutItr = tutGroup.getIterator();
+
+        int i = 1;
+
+        while (tutItr.hasNext()) {
+            TutorialGroup group = tutItr.next();
+            if (group.getProgrammeId().equals(programmeId)) {
+                System.out.println("\nTutorial Group Already Exist.");
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void removeAllTutorialGroupInProgramme(String deleteProgrammeCode){
         Iterator<TutorialGroup> tutGroupIterator = tutGroup.getIterator();
 

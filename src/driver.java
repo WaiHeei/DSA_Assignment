@@ -230,10 +230,6 @@ public class driver {
         tutGrp6.addStudent(student29);
         tutGrp6.addStudent(student30);
 
-        //add tut group to programme
-        programme1.setTutorialGroup(tutGrp1);
-        programme2.setTutorialGroup(tutGrp2);
-
         Scanner scanner = new Scanner(System.in);
 
 
@@ -282,7 +278,23 @@ public class driver {
                     } else if (pOption.equals("5")) {
                         programmeManager.displayAllProgramme(programmeList);
                     } else if (pOption.equals("6")) {
-                        programmeManager.addTutGroup(programmeList);
+                        programmeManager.displayExistingProgramme(programmeList);
+
+                        System.out.println("\nEnter programme ID to add tutorial group: ");
+                        String addTutID = scanner.next();
+
+                        TutorialGroup grpToAdd = programmeManager.addTutGroup(programmeList, addTutID);
+
+                        if (grpToAdd != null){
+                            boolean performAdd = tutor.getTutGroup(addTutID);
+                            if (performAdd == true){
+                                programmeList.
+                                tutGroup.add(grpToAdd);
+                            }
+                        }else {
+                            System.out.println("No such programme.");
+                        }
+
                     } else if (pOption.equals("7")) {
                         // Handle option 7
                     }else if (pOption.equals("8")){

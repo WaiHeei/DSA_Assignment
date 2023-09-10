@@ -5,13 +5,11 @@ import entity.Programme;
 import adt.HashMapInterface;
 import entity.TutorialGroup;
 
-
 import java.util.Iterator;
 import java.util.Scanner;
 
 public class ProgrammeManager {
     private HashMapInterface<String, Programme> p;
-
 
     public ProgrammeManager(HashMapInterface<String, Programme> p){
         this.p = p;
@@ -127,7 +125,7 @@ public class ProgrammeManager {
         }
     }
 
-    public void addTutGroup(HashMapInterface<String, Programme> p){
+    public void displayExistingProgramme(HashMapInterface<String, Programme> p){
         Iterator<HashMap.Entry<String, Programme>> iterator = p.iterator();
         System.out.printf("%-4s : %-4s %-30s","ID" , "Code" , "Name");
         while (iterator.hasNext()){
@@ -137,9 +135,8 @@ public class ProgrammeManager {
             String existProgName = prog.getName();
             System.out.printf("\n%-4s : %-4s %-30s",entry.getKey() , existProgCode , existProgName);
         }
-        System.out.println("\nEnter programme ID to add tutorial group: ");
-        String addTutID = scan.nextLine();
-
+    }
+    public TutorialGroup addTutGroup(HashMapInterface<String, Programme> p, String addTutID){
         if (p.containsKey(addTutID)){
             Programme addTutProg = p.get(addTutID);
             String progCode = addTutProg.getCode();
@@ -151,12 +148,10 @@ public class ProgrammeManager {
             System.out.println("Please enter tutorial group number: ");
             int groupNum = scan.nextInt();
 
-
             TutorialGroup addTutorialGroup = new TutorialGroup(progCode,year, sem, groupNum);
-            addTutProg.setTutorialGroup(addTutorialGroup);
+            return addTutorialGroup;
         }
-
-
+        return null;
     }
 
 }

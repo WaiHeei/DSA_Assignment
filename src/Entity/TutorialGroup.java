@@ -62,8 +62,6 @@ public class TutorialGroup implements Comparable<TutorialGroup>{
         students.add(student);
     }
 
-
-
     @Override
     public String toString() {
         return "Tutorial Group : " + programmeCode + " Y" + year + " S" + semester + " G" + groupNo;
