@@ -90,6 +90,7 @@ public class driver {
     }
 
     public static boolean cont = true;
+    public static boolean valid = true;
 
     public static void main(String[] args) {
         TreeSet<Student> student = new TreeSet<>();
@@ -230,13 +231,14 @@ public class driver {
         boolean validCtnChoice = false;
         boolean continue1 = false;
         boolean continue2 = false;
-        boolean continue5 = false;
         boolean exitToMenu = false;
+        boolean continue5 = false;
         int tutMenuChoice = 0;
         int stdId = 0;
         int continueChoice = 0;
 
-        do {
+        while (valid == true){
+
             Menu();
             int mainMenuChoice = 0;
             do {
@@ -738,7 +740,6 @@ public class driver {
                                         continue2 = true;
                                     } else {
                                         continue2 = false;
-                                        exitToMenu = true;
                                     }
                                 }while (continue2 == true);
                                 break;
@@ -785,7 +786,6 @@ public class driver {
                                         continue2 = true;
                                     } else {
                                         continue2 = false;
-                                        exitToMenu = true;
                                     }
                                 }while (continue2 == true);
                                 break;
@@ -832,7 +832,6 @@ public class driver {
                                         continue2 = true;
                                     } else {
                                         continue2 = false;
-                                        exitToMenu = true;
                                     }
                                 }while (continue2 == true);
                                 break;
@@ -876,7 +875,6 @@ public class driver {
                                         continue2 = true;
                                     } else {
                                         continue2 = false;
-                                        exitToMenu = true;
                                     }
                                 }while (continue2 == true);
                                 break;
@@ -928,17 +926,17 @@ public class driver {
                         System.out.println("|-------------------------------------|");
 
                     } else if (tutMenuChoice == 4) {
-
+                        valid = true;
                     }
-                }while (exitToMenu == true);
-            }else {
-                cont = false;
+                }while (valid == false);
+
             }
 
         }while (cont == false);
 
 
-        }
+
+}
 
 
 
