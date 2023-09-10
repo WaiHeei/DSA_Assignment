@@ -147,5 +147,19 @@ public class TreeSet<T extends Comparable<T>> implements TreeSetInterface<T> {
             this.previous = previous;
         }
     }
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("[");
+        Node currentNode = firstNode;
+        while (currentNode != null) {
+            result.append(currentNode.data);
+            if (currentNode.next != null) {
+                result.append(", ");
+            }
+            currentNode = currentNode.next;
+        }
+        result.append("]");
+        return result.toString();
+    }
 
 }

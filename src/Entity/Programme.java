@@ -74,7 +74,6 @@ public class Programme {
     public String getId() {
         return id;
     }
-
     public String getCode() {
         return code;
     }
@@ -99,8 +98,12 @@ public class Programme {
         this.tutGrp = tutGrp;
     }
 
-    public void addTutGrp(HashMapInterface p, TreeSetInterface t){
+    public TreeSetInterface getTutTree(){
+        return tutorialGroup;
+    }
 
+    public void addTutGrp( TreeSetInterface tutorialGroup, TutorialGroup a){
+        tutorialGroup.add(a);
     }
 
     @Override
@@ -111,7 +114,7 @@ public class Programme {
                 "Programme Description: " + description + "\n" +
                 "Programme Leader: " + programmeLeader + "\n" +
                 "Duration: " + duration + "\n" +
-                  tutGrp.toString() ;
+                  tutorialGroup.toString() ;
 
     }
 }

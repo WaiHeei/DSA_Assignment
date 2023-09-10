@@ -288,8 +288,8 @@ public class driver {
                         if (grpToAdd != null){
                             boolean performAdd = tutor.getTutGroup(addTutID);
                             if (performAdd == true){
-                                programmeList.
-                                tutGroup.add(grpToAdd);
+                                TutorialGroup man = programmeManager.addTutGroup(programmeList,addTutID);
+                                programmeManager.addProgTutGroup(addTutID, programmeList,man);
                             }
                         }else {
                             System.out.println("No such programme.");

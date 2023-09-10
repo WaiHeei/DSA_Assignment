@@ -149,9 +149,14 @@ public class ProgrammeManager {
             int groupNum = scan.nextInt();
 
             TutorialGroup addTutorialGroup = new TutorialGroup(progCode,year, sem, groupNum);
+
             return addTutorialGroup;
         }
         return null;
+    }
+    public void addProgTutGroup(String key,HashMapInterface<String, Programme> p, TutorialGroup t){
+        Programme programme = p.get(key);
+        programme.addTutGrp(programme.getTutTree(),t);
     }
 
 }
