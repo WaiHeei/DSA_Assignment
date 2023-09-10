@@ -1,5 +1,8 @@
 package client;
 
+//Name: Ng Wai Heei
+//Student ID: 22WMR04095
+
 import adt.HashMap;
 import entity.Programme;
 import adt.HashMapInterface;
@@ -103,7 +106,7 @@ public class ProgrammeManager {
     }
 
     public void editProgramme(HashMapInterface<String , Programme> p){
-        displayAllProgramme(p);
+        displayProgrammeList(p);
         System.out.println("Please enter programme ID that you want to edit: ");
         String editProgrammeID = scan.nextLine();
         if (p.containsKey(editProgrammeID)) {

@@ -12,6 +12,9 @@ import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Scanner;
 
+//Name: Ng Wai Heei, Leng Yen Rou
+//Student ID: 22WMR04095 , 22WMR04092
+
 public class driver {
     public static void Menu(){
         System.out.println("===========================================");
@@ -89,8 +92,9 @@ public class driver {
         System.out.println("==============================");
     }
 
-    public static boolean cont = true;
     public static boolean valid = true;
+    public static boolean validProgramme = true;
+    public static boolean validTutGroup = true;
 
     public static void main(String[] args) {
         TreeSet<Student> student = new TreeSet<>();
@@ -259,6 +263,7 @@ public class driver {
                 do {
                     scanner.nextLine();
                     programmeMenu();
+                    System.out.println("Enter your choice > ");
                     String pOption = scanner.next();
 
                     if (pOption.equals("1")) {
@@ -269,6 +274,7 @@ public class driver {
                     } else if (pOption.equals("3")) {
                         programmeManager.searchProgramme(programmeList);
                     } else if (pOption.equals("4")) {
+                        scanner.nextLine();
                         programmeManager.editProgramme(programmeList);
                     } else if (pOption.equals("5")) {
                         programmeManager.displayProgrammeList(programmeList);
@@ -321,9 +327,9 @@ public class driver {
 
 
                     }else if(pOption.equals("0")){
-                        cont = false;
+                        validProgramme = false;
                     }
-                } while (cont);
+                } while (validProgramme);
             } else if (mainMenuChoice == 2) {
                 do {
                     tutMenu();
@@ -926,22 +932,24 @@ public class driver {
                         System.out.println("|-------------------------------------|");
 
                     } else if (tutMenuChoice == 4) {
-                        valid = true;
+                        validTutGroup = false;
                     }
-                }while (valid == false);
+                }while (validTutGroup );
 
+            }else if(mainMenuChoice == 3){
+                valid = false;
             }
 
-        }while (cont == false);
-
-
-
-}
-
+        }
 
 
 
     }
+
+
+
+
+}
 
 
 

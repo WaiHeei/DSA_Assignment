@@ -3,6 +3,9 @@ package adt;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+//Name: Ng Wai Heei
+//Student ID: 22WMR04095
+
 public class HashMap<K, V> implements  HashMapInterface<K, V>{
     public static final int CAPACITY = 20;
     private int size;
