@@ -171,6 +171,16 @@ public class Tutor1 {
             return false;
         }
     }
+
+    public boolean removeTutGrp(Programme programme, TutorialGroup tutGroup){
+        if (tutGroup != null) {
+            programme.getTutorialGroup().remove(tutGroup);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void printAllStudents(TutorialGroup tutGroup) {
         System.out.println("=================================================");
         System.out.println("Students in group "+ tutGroup);

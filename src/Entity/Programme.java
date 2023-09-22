@@ -33,18 +33,7 @@ public class Programme {
         this.duration = duration;
         this.tutorialGroup = new TreeSet<>();
     }
-    public Programme(String id, String code, String name, String description, String programmeLeader, int duration, TutorialGroup[] tutorialGroup){
-        this.id = id;
-        this.code = code;
-        this.name = name;
-        this.description = description;
-        this.programmeLeader = programmeLeader;
-        this.duration = duration;
-    }
 
-    public Programme(TreeSetInterface tutorialGroup){
-        this.tutorialGroup = tutorialGroup;
-    }
 
     //Setter
     public void setId(String id) {
@@ -95,16 +84,12 @@ public class Programme {
         return duration;
     }
 
-    public void setTutorialGroup(TutorialGroup tutorialGroup){
-        this.tutGrp = tutGrp;
+    public void addTutGrp(TutorialGroup tutGrp){
+        tutorialGroup.add(tutGrp);
     }
 
-    public TreeSetInterface getTutTree(){
+    public TreeSetInterface<TutorialGroup> getTutorialGroup() {
         return tutorialGroup;
-    }
-
-    public void addTutGrp( TreeSetInterface tutorialGroup, TutorialGroup a){
-        tutorialGroup.add(a);
     }
 
     @Override

@@ -177,10 +177,17 @@ public class driver {
         TutorialGroup tutGrp1 = new TutorialGroup("TG1",programmeList.get(programme1.getId()).getCode(), 1, 1, 1);
         TutorialGroup tutGrp2 = new TutorialGroup("TG2",programmeList.get(programme1.getId()).getCode(), 2, 2, 3);
         TutorialGroup tutGrp3 = new TutorialGroup("TG3",programmeList.get(programme1.getId()).getCode(), 3, 1, 2);
+        programme1.addTutGrp(tutGrp1);
+        programme1.addTutGrp(tutGrp2);
+        programme1.addTutGrp(tutGrp3);
 
         TutorialGroup tutGrp4 = new TutorialGroup("TG4",programmeList.get(programme2.getId()).getCode(), 1, 2, 3);
         TutorialGroup tutGrp5 = new TutorialGroup("TG5",programmeList.get(programme2.getId()).getCode(), 2, 3, 2);
         TutorialGroup tutGrp6 = new TutorialGroup("TG6",programmeList.get(programme2.getId()).getCode(), 3, 1, 1);
+        programme2.addTutGrp(tutGrp4);
+        programme2.addTutGrp(tutGrp5);
+        programme2.addTutGrp(tutGrp6);
+
 
         tutGroup.add(tutGrp1);
         tutGroup.add(tutGrp2);
@@ -269,6 +276,7 @@ public class driver {
                     if (pOption.equals("1")) {
                         programmeManager.addProgramme(programmeList);
                     } else if (pOption.equals("2")) {
+                        programmeManager.displayProgrammeList(programmeList);
                         String pCode = programmeManager.deleteProgramme(programmeList);
                         tutor.removeAllTutorialGroupInProgramme(pCode);
                     } else if (pOption.equals("3")) {
@@ -308,19 +316,29 @@ public class driver {
 
                         TutorialGroup newTutGrp = new TutorialGroup(tutGroupId, newProgrammeCode,newTutGrpYear, newTutGrpSem, newTutGrpNo);
                         tutGroup.add(newTutGrp);
+                        newProgramme.addTutGrp(newTutGrp);
 
                         System.out.println("Successfully Added!");
 
                     }else if (pOption.equals("8")){
-                        tutor.printAllGroup();
-                        System.out.println("Enter Tutorial Group Id to remove: ");
-                        String removeID = scanner.next();
-                        if (tutor.checkTutGroup(removeID)) {
-                            TutorialGroup removeGroup = tutor.getTutGroupByID(removeID);
-                            tutGroup.remove(removeGroup);
-                            System.out.println("Successfully removed!");
-                        }else {
-                            System.out.println("No such tutorial group!");
+                        programmeManager.displayAllProgramme(programmeList);
+                        System.out.println("Enter Programme ID to remove tutorial group: ");
+                        String deleteProgrammeId = scanner.next();
+                        if (programmeList.containsKey(deleteProgrammeId)) {
+                            tutor.printAllGroup();
+                            System.out.println("Enter Tutorial Group Id to remove: ");
+                            String removeID = scanner.next();
+                            if (tutor.checkTutGroup(removeID)) {
+                                TutorialGroup removeGroup = tutor.getTutGroupByID(removeID);
+                                tutGroup.remove(removeGroup);
+                                Programme prog = programmeList.get(deleteProgrammeId);
+                                boolean flag = tutor.removeTutGrp(prog, removeGroup);
+                                if (flag == true) {
+                                    System.out.println("Successfully removed!");
+                                }
+                            } else {
+                                System.out.println("No such tutorial group!");
+                            }
                         }
                     }else if (pOption.equals("9")){
                         programmeManager.displayAllProgramme(programmeList);
